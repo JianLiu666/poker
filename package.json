@@ -1,0 +1,25 @@
+{
+  "name": "poker-outs-calculator",
+  "version": "1.0.0",
+  "description": "A TypeScript poker outs calculator for comparing probabilities",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "example": "ts-node examples/simple-usage.ts",
+    "clean": "rm -rf dist"
+  },
+  "keywords": ["poker", "outs", "probability", "typescript"],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {}
+} 
