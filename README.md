@@ -30,19 +30,44 @@ npm install
 # Build the project
 npm run build
 
-# Run the calculator
-npm start
-
-# Or run in development mode
-npm run dev
+# Run different modes
+npm start              # Run basic demo
+npm run cli           # Interactive CLI mode
+npm run demo          # Complete feature demo
+npm run dev           # Development mode
 ```
 
 ## 📖 Usage Examples
 
-### Basic Usage
+### CLI Usage (Recommended)
+
+```bash
+# Show all available commands
+npm run cli
+
+# Compare outs 1-10 with Rule of 4 analysis
+npm run cli comparison
+
+# Compare outs 1-15 without Rule of 4
+npm run cli comparison --max-outs 15 --no-rule
+
+# Detailed analysis for 9 outs (flush draw)
+npm run cli analysis 9
+
+# Pot odds analysis: 9 outs, $100 pot, $50 bet
+npm run cli pot-odds 9 100 50
+
+# Show poker scenarios
+npm run cli scenarios
+
+# Quick reference guide
+npm run cli reference
+```
+
+### Library Usage
 
 ```typescript
-import { PokerOutsCalculator } from './src/utils/poker-calculator';
+import { PokerOutsCalculator, DisplayFormatter } from 'poker-outs-calculator';
 
 // Calculate probability for 9 outs (flush draw)
 const result = PokerOutsCalculator.calculateOutsProbability(9);
@@ -50,28 +75,22 @@ console.log(`Turn: ${result.percentageOnTurn}%`);
 console.log(`River: ${result.percentageOnRiver}%`);
 console.log(`Total: ${result.percentageTotal}%`);
 console.log(`Odds: ${result.odds}`);
-```
-
-### Compare Multiple Outs
-
-```typescript
-import { DisplayFormatter } from './src/utils/display-formatter';
 
 // Display comparison table for outs 1-10
 DisplayFormatter.displayOutsComparison(10);
 
-// Detailed analysis for specific outs
-DisplayFormatter.displayDetailedAnalysis(9);
-```
-
-### Pot Odds Analysis
-
-```typescript
 // Analyze if a call is profitable
 const isProfitable = PokerOutsCalculator.isCallProfitable(9, 100, 50);
-// 9 outs, $100 pot, $50 bet to call
+```
 
-DisplayFormatter.displayPotOddsAnalysis(9, 100, 50);
+### Programmatic CLI Usage
+
+```typescript
+import { PokerCLI } from 'poker-outs-calculator';
+
+const cli = new PokerCLI();
+await cli.run(['analysis', '9']);
+await cli.run(['pot-odds', '9', '100', '50']);
 ```
 
 ## 🎯 Poker Scenarios Included
@@ -156,14 +175,47 @@ src/
 # Install dependencies
 npm install
 
-# Run in development mode
-npm run dev
+# Development commands
+npm run dev           # Run with basic demo
+npm run cli           # Interactive CLI mode
+npm run demo          # Complete feature demonstration
+npm run example       # Simple usage examples
+npm run example:cli   # CLI usage examples
 
-# Build for production
-npm run build
+# Build and production
+npm run build         # Compile TypeScript
+npm start             # Run compiled version
+npm run clean         # Clean build directory
+```
 
-# Clean build directory
-npm run clean
+## 🏗️ Project Structure
+
+```
+src/
+├── cli/                    # CLI command system
+│   ├── commands/          # Individual command implementations
+│   │   ├── comparison-command.ts
+│   │   ├── analysis-command.ts
+│   │   ├── scenarios-command.ts
+│   │   ├── pot-odds-command.ts
+│   │   └── reference-command.ts
+│   ├── base-command.ts    # Abstract base command class
+│   ├── command-registry.ts # Command registration and management
+│   ├── argument-parser.ts  # CLI argument parsing
+│   └── cli.ts             # Main CLI orchestrator
+├── types/                 # TypeScript type definitions
+│   └── poker.ts
+├── utils/                 # Core calculation utilities
+│   ├── poker-calculator.ts
+│   └── display-formatter.ts
+├── scenarios/             # Predefined poker scenarios
+│   └── poker-scenarios.ts
+├── index.ts              # Main library entry point
+└── demo.ts               # Complete feature demonstration
+
+examples/
+├── simple-usage.ts       # Basic library usage
+└── cli-usage.ts          # CLI and programmatic examples
 ```
 
 ## 📝 License
