@@ -23,7 +23,7 @@ export class HandParser {
    * 解析手牌字符串（如 "AKs", "QQ", "72o"）
    * s = suited (同花色), o = offsuit (不同花色), 無後綴表示對子
    */
-  static parseHand(handStr: string): HoleCards {
+  static parseHand(handStr: string, usedCards: Card[] = []): HoleCards {
     if (!handStr || handStr.length < 2) {
       throw new Error(`無效的手牌格式: ${handStr}`);
     }
@@ -46,10 +46,18 @@ export class HandParser {
       if (normalized.length > 2) {
         throw new Error(`對子不應該有花色後綴: ${handStr}`);
       }
-      // 對子，分配不同花色
+      // 對子，找到兩張不同花色且未被使用的牌
+      const availableSuits = this.SUITS.filter(suit => 
+        !usedCards.some(card => card.rank === rank1 && card.suit === suit)
+      );
+      
+      if (availableSuits.length < 2) {
+        throw new Error(`無法為對子 ${handStr} 分配足夠的可用牌`);
+      }
+      
       return {
-        card1: { rank: rank1, suit: Suit.HEARTS },
-        card2: { rank: rank2, suit: Suit.DIAMONDS }
+        card1: { rank: rank1, suit: availableSuits[0]! },
+        card2: { rank: rank2, suit: availableSuits[1]! }
       };
     }
 
@@ -57,17 +65,48 @@ export class HandParser {
     const suffix = normalized.length > 2 ? normalized.charAt(2) : '';
     
     if (suffix === 'S') {
-      // 同花色
-      const suitIndex = Math.floor(Math.random() * this.SUITS.length);
-      const suit = this.SUITS[suitIndex]!;
+      // 同花色 - 找到一個未被使用的花色
+      const availableSuits = this.SUITS.filter(suit => 
+        !usedCards.some(card => 
+          (card.rank === rank1 || card.rank === rank2) && card.suit === suit
+        )
+      );
+      
+      if (availableSuits.length === 0) {
+        throw new Error(`無法為同花手牌 ${handStr} 找到可用的花色`);
+      }
+      
+      const suit = availableSuits[0]!;
       return {
         card1: { rank: rank1, suit },
         card2: { rank: rank2, suit }
       };
     } else if (suffix === 'O' || suffix === '') {
       // 不同花色或無後綴（默認不同花色）
-      const suit1 = Suit.HEARTS;
-      const suit2 = Suit.DIAMONDS;
+      // 為兩張牌分配不同的花色，避免與已使用的牌重複
+      let suit1: Suit | null = null;
+      let suit2: Suit | null = null;
+      
+      // 為第一張牌找花色
+      for (const suit of this.SUITS) {
+        if (!usedCards.some(card => card.rank === rank1 && card.suit === suit)) {
+          suit1 = suit;
+          break;
+        }
+      }
+      
+      // 為第二張牌找不同的花色
+      for (const suit of this.SUITS) {
+        if (suit !== suit1 && !usedCards.some(card => card.rank === rank2 && card.suit === suit)) {
+          suit2 = suit;
+          break;
+        }
+      }
+      
+      if (!suit1 || !suit2) {
+        throw new Error(`無法為手牌 ${handStr} 分配足夠的可用牌`);
+      }
+      
       return {
         card1: { rank: rank1, suit: suit1 },
         card2: { rank: rank2, suit: suit2 }

@@ -138,10 +138,14 @@ export class PokerSimulator {
    * 快速模擬（用於大量模擬時的優化版本）
    */
   static quickSimulate(hand1Str: string, hand2Str: string, iterations: number): SimulationResult {
+    // 先解析第一個手牌
     const player1Hand = HandParser.parseHand(hand1Str);
-    const player2Hand = HandParser.parseHand(hand2Str);
     
-    // 檢查手牌是否重複
+    // 解析第二個手牌時，考慮第一個手牌已使用的牌
+    const usedCards = [player1Hand.card1, player1Hand.card2];
+    const player2Hand = HandParser.parseHand(hand2Str, usedCards);
+    
+    // 檢查手牌是否重複（雙重保險）
     this.validateHands(player1Hand, player2Hand);
     
     return this.simulate(player1Hand, player2Hand, iterations);
