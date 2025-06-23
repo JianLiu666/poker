@@ -10,7 +10,7 @@ export class AnalysisCommand extends BaseCommand {
   readonly description = '顯示特定 Outs 數量的詳細分析';
   readonly usage = 'poker analysis <outs>';
 
-  execute(options: AnalysisOptions): void {
+  execute(options: AnalysisOptions, positionalArgs: string[] = []): void {
     const { outs } = options;
 
     if (!outs || outs < 1 || outs > 47) {

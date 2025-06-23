@@ -37,7 +37,7 @@ export class PokerCLI {
         return;
       }
 
-      await command.execute(parsed.options);
+      await command.execute(parsed.options, parsed.positionalArgs);
     } catch (error) {
       console.error(`❌ 執行錯誤: ${error instanceof Error ? error.message : '未知錯誤'}`);
       process.exit(1);
@@ -56,6 +56,7 @@ export class PokerCLI {
     console.log('  poker analysis 9                  # 分析 9 outs 的詳細資訊');
     console.log('  poker pot-odds 9 100 50           # 分析底池賠率 (9 outs, $100 pot, $50 bet)');
     console.log('  poker scenarios --min-outs 8      # 顯示 8+ outs 的場景');
+    console.log('  poker simulate AKs QQ 1000000     # 模擬AK同花 vs QQ對子的勝率');
     console.log('  poker reference                   # 顯示快速參考指南\n');
   }
 }

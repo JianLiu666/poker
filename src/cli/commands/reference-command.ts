@@ -6,7 +6,7 @@ export class ReferenceCommand extends BaseCommand {
   readonly description = '顯示快速參考指南';
   readonly usage = 'poker reference';
 
-  execute(_options?: CommandOptions): void {
+  execute(_options?: CommandOptions, positionalArgs: string[] = []): void {
     this.log('📖 德州撲克 Outs 快速參考');
     this.log('============================================================\n');
     

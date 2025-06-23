@@ -12,7 +12,7 @@ export class ScenariosCommand extends BaseCommand {
   readonly description = '顯示實戰撲克場景分析';
   readonly usage = 'poker scenarios [--min-outs <number>] [--max-outs <number>]';
 
-  execute(options: ScenariosOptions = {}): void {
+  execute(options: ScenariosOptions = {}, positionalArgs: string[] = []): void {
     const { minOuts = 1, maxOuts = 10 } = options;
 
     this.log('🎯 實戰撲克場景分析');

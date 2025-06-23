@@ -3,6 +3,7 @@ import { CommandOptions } from './base-command';
 export interface ParsedCommand {
   commandName: string;
   options: CommandOptions;
+  positionalArgs: string[];
   showHelp: boolean;
 }
 
@@ -11,6 +12,7 @@ export class ArgumentParser {
     const result: ParsedCommand = {
       commandName: '',
       options: {},
+      positionalArgs: [],
       showHelp: false
     };
 
@@ -42,6 +44,11 @@ export class ArgumentParser {
         break;
       case 'pot-odds':
         result.options = this.parsePotOddsArgs(remainingArgs);
+        break;
+      case 'simulate':
+        const { options, positionalArgs } = this.parseSimulateArgs(remainingArgs);
+        result.options = options;
+        result.positionalArgs = positionalArgs;
         break;
       default:
         result.options = {};
@@ -109,5 +116,24 @@ export class ArgumentParser {
     }
     
     return options;
+  }
+
+  private static parseSimulateArgs(args: string[]): { options: CommandOptions; positionalArgs: string[] } {
+    const options: CommandOptions = {};
+    const positionalArgs: string[] = [];
+    
+    for (let i = 0; i < args.length; i++) {
+      const currentArg = args[i];
+      const nextArg = args[i + 1];
+      
+      if (currentArg === '--iterations' && nextArg) {
+        options.iterations = parseInt(nextArg);
+        i++; // Skip next argument
+      } else if (currentArg && !currentArg.startsWith('--')) {
+        positionalArgs.push(currentArg);
+      }
+    }
+    
+    return { options, positionalArgs };
   }
 } 

@@ -12,7 +12,7 @@ export class ComparisonCommand extends BaseCommand {
   readonly description = '顯示不同 Outs 數量的機率比較表';
   readonly usage = 'poker comparison [--max-outs <number>] [--show-rule]';
 
-  execute(options: ComparisonOptions = {}): void {
+  execute(options: ComparisonOptions = {}, positionalArgs: string[] = []): void {
     const { maxOuts = 10, showRule = true } = options;
 
     this.log('🃏 德州撲克 Outs 計算器 - Texas Hold\'em Outs Calculator');

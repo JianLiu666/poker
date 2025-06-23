@@ -12,7 +12,7 @@ export class PotOddsCommand extends BaseCommand {
   readonly description = '分析底池賠率決策';
   readonly usage = 'poker pot-odds <outs> <pot-size> <bet-size>';
 
-  execute(options: PotOddsOptions): void {
+  execute(options: PotOddsOptions, positionalArgs: string[] = []): void {
     const { outs, potSize, betSize } = options;
 
     if (!outs || !potSize || !betSize) {

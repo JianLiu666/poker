@@ -4,6 +4,7 @@ import { AnalysisCommand } from './commands/analysis-command';
 import { ScenariosCommand } from './commands/scenarios-command';
 import { PotOddsCommand } from './commands/pot-odds-command';
 import { ReferenceCommand } from './commands/reference-command';
+import { SimulationCommand } from './commands/simulation-command';
 
 export class CommandRegistry {
   private commands: Map<string, BaseCommand> = new Map();
@@ -18,7 +19,8 @@ export class CommandRegistry {
       new AnalysisCommand(),
       new ScenariosCommand(),
       new PotOddsCommand(),
-      new ReferenceCommand()
+      new ReferenceCommand(),
+      new SimulationCommand()
     ];
 
     commands.forEach(command => {

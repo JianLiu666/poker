@@ -7,7 +7,7 @@ export abstract class BaseCommand {
   abstract readonly description: string;
   abstract readonly usage: string;
 
-  abstract execute(options?: CommandOptions): void | Promise<void>;
+  abstract execute(options?: CommandOptions, positionalArgs?: string[]): void | Promise<void>;
 
   protected log(message: string): void {
     console.log(message);
