@@ -136,19 +136,51 @@ export class PokerSimulator {
 
   /**
    * 快速模擬（用於大量模擬時的優化版本）
+   * 每次模擬都會重新隨機分配花色，確保結果的準確性
    */
   static quickSimulate(hand1Str: string, hand2Str: string, iterations: number): SimulationResult {
-    // 先解析第一個手牌
-    const player1Hand = HandParser.parseHand(hand1Str);
-    
-    // 解析第二個手牌時，考慮第一個手牌已使用的牌
-    const usedCards = [player1Hand.card1, player1Hand.card2];
-    const player2Hand = HandParser.parseHand(hand2Str, usedCards);
-    
-    // 檢查手牌是否重複（雙重保險）
-    this.validateHands(player1Hand, player2Hand);
-    
-    return this.simulate(player1Hand, player2Hand, iterations);
+    if (iterations <= 0) {
+      throw new Error('模擬次數必須大於0');
+    }
+
+    let player1Wins = 0;
+    let player2Wins = 0;
+    let ties = 0;
+
+    for (let i = 0; i < iterations; i++) {
+      // 每次模擬都重新隨機分配花色
+      const player1Hand = HandParser.parseHand(hand1Str);
+      const usedCards = [player1Hand.card1, player1Hand.card2];
+      const player2Hand = HandParser.parseHand(hand2Str, usedCards);
+      
+      // 檢查手牌是否重複（雙重保險）
+      this.validateHands(player1Hand, player2Hand);
+      
+      // 執行單場遊戲模擬
+      const result = this.simulateSingleGame(player1Hand, player2Hand);
+      
+      if (result.winner === 0) {
+        player1Wins++;
+      } else if (result.winner === 1) {
+        player2Wins++;
+      } else {
+        ties++;
+      }
+    }
+
+    const player1WinRate = (player1Wins / iterations) * 100;
+    const player2WinRate = (player2Wins / iterations) * 100;
+    const tieRate = (ties / iterations) * 100;
+
+    return {
+      player1Wins,
+      player2Wins,
+      ties,
+      totalGames: iterations,
+      player1WinRate,
+      player2WinRate,
+      tieRate
+    };
   }
 
   /**

@@ -46,7 +46,7 @@ export class HandParser {
       if (normalized.length > 2) {
         throw new Error(`對子不應該有花色後綴: ${handStr}`);
       }
-      // 對子，找到兩張不同花色且未被使用的牌
+      // 對子，隨機選擇兩張不同花色且未被使用的牌
       const availableSuits = this.SUITS.filter(suit => 
         !usedCards.some(card => card.rank === rank1 && card.suit === suit)
       );
@@ -55,9 +55,12 @@ export class HandParser {
         throw new Error(`無法為對子 ${handStr} 分配足夠的可用牌`);
       }
       
+      // 隨機洗牌可用花色以確保隨機分配
+      const shuffledSuits = this.shuffleArray([...availableSuits]);
+      
       return {
-        card1: { rank: rank1, suit: availableSuits[0]! },
-        card2: { rank: rank2, suit: availableSuits[1]! }
+        card1: { rank: rank1, suit: shuffledSuits[0]! },
+        card2: { rank: rank2, suit: shuffledSuits[1]! }
       };
     }
 
@@ -65,7 +68,7 @@ export class HandParser {
     const suffix = normalized.length > 2 ? normalized.charAt(2) : '';
     
     if (suffix === 'S') {
-      // 同花色 - 找到一個未被使用的花色
+      // 同花色 - 隨機選擇一個未被使用的花色
       const availableSuits = this.SUITS.filter(suit => 
         !usedCards.some(card => 
           (card.rank === rank1 || card.rank === rank2) && card.suit === suit
@@ -76,36 +79,43 @@ export class HandParser {
         throw new Error(`無法為同花手牌 ${handStr} 找到可用的花色`);
       }
       
-      const suit = availableSuits[0]!;
+      // 隨機選擇一個可用花色
+      const randomIndex = Math.floor(Math.random() * availableSuits.length);
+      const suit = availableSuits[randomIndex]!;
+      
       return {
         card1: { rank: rank1, suit },
         card2: { rank: rank2, suit }
       };
     } else if (suffix === 'O' || suffix === '') {
       // 不同花色或無後綴（默認不同花色）
-      // 為兩張牌分配不同的花色，避免與已使用的牌重複
-      let suit1: Suit | null = null;
-      let suit2: Suit | null = null;
+      // 為兩張牌隨機分配不同的花色，避免與已使用的牌重複
       
-      // 為第一張牌找花色
-      for (const suit of this.SUITS) {
-        if (!usedCards.some(card => card.rank === rank1 && card.suit === suit)) {
-          suit1 = suit;
-          break;
-        }
+      // 獲取第一張牌的可用花色
+      const availableSuitsForCard1 = this.SUITS.filter(suit => 
+        !usedCards.some(card => card.rank === rank1 && card.suit === suit)
+      );
+      
+      if (availableSuitsForCard1.length === 0) {
+        throw new Error(`無法為手牌 ${handStr} 的第一張牌找到可用花色`);
       }
       
-      // 為第二張牌找不同的花色
-      for (const suit of this.SUITS) {
-        if (suit !== suit1 && !usedCards.some(card => card.rank === rank2 && card.suit === suit)) {
-          suit2 = suit;
-          break;
-        }
+      // 隨機選擇第一張牌的花色
+      const suit1Index = Math.floor(Math.random() * availableSuitsForCard1.length);
+      const suit1 = availableSuitsForCard1[suit1Index]!;
+      
+      // 獲取第二張牌的可用花色（排除第一張牌的花色）
+      const availableSuitsForCard2 = this.SUITS.filter(suit => 
+        suit !== suit1 && !usedCards.some(card => card.rank === rank2 && card.suit === suit)
+      );
+      
+      if (availableSuitsForCard2.length === 0) {
+        throw new Error(`無法為手牌 ${handStr} 的第二張牌找到可用花色`);
       }
       
-      if (!suit1 || !suit2) {
-        throw new Error(`無法為手牌 ${handStr} 分配足夠的可用牌`);
-      }
+      // 隨機選擇第二張牌的花色
+      const suit2Index = Math.floor(Math.random() * availableSuitsForCard2.length);
+      const suit2 = availableSuitsForCard2[suit2Index]!;
       
       return {
         card1: { rank: rank1, suit: suit1 },
@@ -143,6 +153,23 @@ export class HandParser {
       const cardJ = shuffled[j]!;
       shuffled[i] = cardJ;
       shuffled[j] = cardI;
+    }
+    
+    return shuffled;
+  }
+
+  /**
+   * 通用陣列洗牌算法
+   */
+  private static shuffleArray<T>(array: T[]): T[] {
+    const shuffled = [...array];
+    
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const itemI = shuffled[i]!;
+      const itemJ = shuffled[j]!;
+      shuffled[i] = itemJ;
+      shuffled[j] = itemI;
     }
     
     return shuffled;
