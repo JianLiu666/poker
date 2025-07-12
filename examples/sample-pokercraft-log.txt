@@ -1,0 +1,138 @@
+PokerStars Hand #123456789: Hold'em No Limit ($0.05/$0.10 USD) - 2024/01/15 14:30:00 UTC [2024/01/15 9:30:00 ET]
+Table 'Antares IV' 6-max Seat #1 is the button
+Seat 1: Hero ($10.00 in chips)
+Seat 2: Villain1 ($8.50 in chips)
+Seat 3: Villain2 ($15.20 in chips)
+Seat 4: Villain3 ($12.75 in chips)
+Seat 5: Villain4 ($9.30 in chips)
+Seat 6: Villain5 ($11.45 in chips)
+Villain1: posts small blind $0.05
+Villain2: posts big blind $0.10
+*** HOLE CARDS ***
+Dealt to Hero [As Kh]
+Villain3: folds
+Villain4: calls $0.10
+Villain5: folds
+Hero: raises $0.30 to $0.40
+Villain1: folds
+Villain2: calls $0.30
+Villain4: calls $0.30
+*** FLOP *** [Ah 7c 2d]
+Villain2: checks
+Villain4: checks
+Hero: bets $0.80
+Villain2: calls $0.80
+Villain4: folds
+*** TURN *** [Ah 7c 2d] [Kd]
+Villain2: checks
+Hero: bets $1.60
+Villain2: calls $1.60
+*** RIVER *** [Ah 7c 2d Kd] [3s]
+Villain2: checks
+Hero: bets $2.50
+Villain2: folds
+Uncalled bet ($2.50) returned to Hero
+Hero collected $5.85 from pot
+Hero: doesn't show hand
+*** SUMMARY ***
+Total pot $6.05 | Rake $0.20
+Board [Ah 7c 2d Kd 3s]
+Seat 1: Hero (button) collected ($5.85)
+Seat 2: Villain1 (small blind) folded before Flop
+Seat 3: Villain2 (big blind) folded on the River
+Seat 4: Villain3 folded before Flop (didn't bet)
+Seat 5: Villain4 folded on the Flop
+Seat 6: Villain5 folded before Flop (didn't bet)
+
+PokerStars Hand #123456790: Hold'em No Limit ($0.05/$0.10 USD) - 2024/01/15 14:32:00 UTC [2024/01/15 9:32:00 ET]
+Table 'Antares IV' 6-max Seat #2 is the button
+Seat 1: Hero ($13.75 in chips)
+Seat 2: Villain1 ($8.45 in chips)
+Seat 3: Villain2 ($12.85 in chips)
+Seat 4: Villain3 ($12.75 in chips)
+Seat 5: Villain4 ($8.90 in chips)
+Seat 6: Villain5 ($11.45 in chips)
+Villain2: posts small blind $0.05
+Villain3: posts big blind $0.10
+*** HOLE CARDS ***
+Dealt to Hero [9h 9s]
+Villain4: folds
+Villain5: calls $0.10
+Hero: raises $0.30 to $0.40
+Villain1: folds
+Villain2: calls $0.35
+Villain3: folds
+Villain5: calls $0.30
+*** FLOP *** [2c 8d 9c]
+Villain2: checks
+Villain5: checks
+Hero: bets $0.90
+Villain2: calls $0.90
+Villain5: folds
+*** TURN *** [2c 8d 9c] [Jh]
+Villain2: checks
+Hero: bets $1.80
+Villain2: calls $1.80
+*** RIVER *** [2c 8d 9c Jh] [4s]
+Villain2: checks
+Hero: bets $3.20
+Villain2: calls $3.20
+*** SHOW DOWN ***
+Hero: shows [9h 9s] (three of a kind, Nines)
+Villain2: mucks hand
+Hero collected $13.25 from pot
+*** SUMMARY ***
+Total pot $13.75 | Rake $0.50
+Board [2c 8d 9c Jh 4s]
+Seat 1: Hero showed [9h 9s] and won ($13.25) with three of a kind, Nines
+Seat 2: Villain1 (button) folded before Flop (didn't bet)
+Seat 3: Villain2 (small blind) mucked [8c 7c]
+Seat 4: Villain3 (big blind) folded before Flop
+Seat 5: Villain4 folded before Flop (didn't bet)
+Seat 6: Villain5 folded on the Flop
+
+PokerStars Hand #123456791: Hold'em No Limit ($0.05/$0.10 USD) - 2024/01/15 14:35:00 UTC [2024/01/15 9:35:00 ET]
+Table 'Antares IV' 6-max Seat #3 is the button
+Seat 1: Hero ($22.60 in chips)
+Seat 2: Villain1 ($8.45 in chips)
+Seat 3: Villain2 ($6.70 in chips)
+Seat 4: Villain3 ($12.65 in chips)
+Seat 5: Villain4 ($8.90 in chips)
+Seat 6: Villain5 ($11.05 in chips)
+Villain3: posts small blind $0.05
+Villain4: posts big blind $0.10
+*** HOLE CARDS ***
+Dealt to Hero [Qh Qc]
+Villain5: folds
+Hero: raises $0.30 to $0.40
+Villain1: calls $0.40
+Villain2: calls $0.40
+Villain3: folds
+Villain4: folds
+*** FLOP *** [Ks 5h 3d]
+Hero: checks
+Villain1: bets $0.60
+Villain2: folds
+Hero: calls $0.60
+*** TURN *** [Ks 5h 3d] [Qd]
+Hero: checks
+Villain1: bets $1.20
+Hero: raises $2.40 to $3.60
+Villain1: calls $2.40
+*** RIVER *** [Ks 5h 3d Qd] [7s]
+Hero: bets $5.50
+Villain1: calls $3.85 and is all-in
+Uncalled bet ($1.65) returned to Hero
+*** SHOW DOWN ***
+Hero: shows [Qh Qc] (three of a kind, Queens)
+Villain1: shows [Kh Kc] (three of a kind, Kings)
+Villain1 collected $16.75 from pot
+*** SUMMARY ***
+Total pot $17.45 | Rake $0.70
+Board [Ks 5h 3d Qd 7s]
+Seat 1: Hero showed [Qh Qc] and lost with three of a kind, Queens
+Seat 2: Villain1 showed [Kh Kc] and won ($16.75) with three of a kind, Kings
+Seat 3: Villain2 (button) folded on the Flop
+Seat 4: Villain3 (small blind) folded before Flop
+Seat 5: Villain4 (big blind) folded before Flop
+Seat 6: Villain5 folded before Flop (didn't bet) 

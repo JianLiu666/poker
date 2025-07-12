@@ -136,3 +136,19 @@ dist
 .pnp.*
 
 .vscode
+
+# Poker data and analysis outputs (private data)
+data/
+*.db
+*.html
+poker_data.db
+poker_charts.html
+complete_analysis.html
+analysis_*.html
+
+# Poker log files (exclude examples)
+*.txt
+!examples/*.txt
+!README.md
+!ARCHITECTURE.md
+!POKERCRAFT_README.md

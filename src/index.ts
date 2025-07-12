@@ -12,6 +12,15 @@ export * from './types/poker';
 export { PokerCLI } from './cli/cli';
 export { BaseCommand } from './cli/base-command';
 
+// PokerCraft analysis exports
+export { PokerCraftParser } from './utils/pokercraft-parser';
+export { PokerDatabase } from './database/database';
+
+// Simulation exports
+export { PokerSimulator } from './utils/poker-simulator';
+export { HandParser } from './utils/hand-parser';
+export { HandEvaluator } from './utils/hand-evaluator';
+
 // Import CLI for direct execution
 import { PokerCLI } from './cli/cli';
 

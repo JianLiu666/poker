@@ -11,6 +11,7 @@
     "demo": "ts-node src/demo.ts",
     "example": "ts-node examples/simple-usage.ts",
     "example:cli": "ts-node examples/cli-usage.ts",
+    "example:pokercraft": "ts-node examples/pokercraft-usage.ts",
     "clean": "rm -rf dist"
   },
   "keywords": ["poker", "outs", "probability", "typescript"],
@@ -21,8 +22,13 @@
   },
   "devDependencies": {
     "@types/node": "^20.10.0",
+    "@types/sqlite3": "^3.1.11",
+    "@types/fs-extra": "^11.0.4",
     "ts-node": "^10.9.1",
     "typescript": "^5.3.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "sqlite3": "^5.1.6",
+    "fs-extra": "^11.2.0"
+  }
 } 

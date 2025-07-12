@@ -99,3 +99,167 @@ export interface SimulationResult {
   player2WinRate: number;
   tieRate: number;
 } 
+
+// PokerCraft 日誌解析相關類型
+export interface PokerCraftHand {
+  handId: string;
+  gameType: string;
+  stakes: string;
+  tableId: string;
+  timestamp: Date;
+  buttonPosition: number;
+  maxPlayers: number;
+  players: PokerCraftPlayer[];
+  preflop: PokerCraftAction[];
+  flop?: PokerCraftAction[];
+  turn?: PokerCraftAction[];
+  river?: PokerCraftAction[];
+  showdown?: PokerCraftShowdown[];
+  summary: PokerCraftSummary;
+  heroPosition?: number;
+  heroCards?: Card[];
+  communityCards?: Card[];
+  potSize: number;
+  rake: number;
+}
+
+export interface PokerCraftPlayer {
+  name: string;
+  position: number;
+  stack: number;
+  isHero: boolean;
+}
+
+export interface PokerCraftAction {
+  player: string;
+  action: ActionType;
+  amount?: number;
+  position: number;
+  street: Street;
+}
+
+export interface PokerCraftShowdown {
+  player: string;
+  cards: Card[];
+  handRank: string;
+  position: number;
+}
+
+export interface PokerCraftSummary {
+  totalPot: number;
+  rake: number;
+  winners: PokerCraftWinner[];
+  board?: Card[];
+}
+
+export interface PokerCraftWinner {
+  player: string;
+  amount: number;
+  handDescription?: string;
+}
+
+export enum ActionType {
+  FOLD = 'fold',
+  CHECK = 'check',
+  CALL = 'call',
+  BET = 'bet',
+  RAISE = 'raise',
+  ALL_IN = 'all-in',
+  POST_SB = 'post-sb',
+  POST_BB = 'post-bb',
+  POST_ANTE = 'post-ante'
+}
+
+export enum Street {
+  PREFLOP = 'preflop',
+  FLOP = 'flop',
+  TURN = 'turn',
+  RIVER = 'river'
+}
+
+// 數據庫相關類型
+export interface DatabaseHand {
+  id?: number;
+  hand_id: string;
+  game_type: string;
+  stakes: string;
+  table_id: string;
+  timestamp: string;
+  button_position: number;
+  max_players: number;
+  pot_size: number;
+  rake: number;
+  hero_position?: number;
+  hero_cards?: string;
+  community_cards?: string;
+  created_at?: string;
+}
+
+export interface DatabasePlayer {
+  id?: number;
+  hand_id: string;
+  name: string;
+  position: number;
+  stack: number;
+  is_hero: boolean;
+  created_at?: string;
+}
+
+export interface DatabaseAction {
+  id?: number;
+  hand_id: string;
+  player: string;
+  action: string;
+  amount?: number;
+  position: number;
+  street: string;
+  action_order: number;
+  created_at?: string;
+}
+
+export interface DatabaseShowdown {
+  id?: number;
+  hand_id: string;
+  player: string;
+  cards: string;
+  hand_rank: string;
+  position: number;
+  created_at?: string;
+}
+
+// 分析相關類型
+export interface GameStats {
+  totalHands: number;
+  totalWon: number;
+  totalLost: number;
+  netWinnings: number;
+  vpip: number; // Voluntarily Put In Pot
+  pfr: number;  // Pre-Flop Raise
+  aggression: number;
+  winRate: number;
+  bb100: number; // Big blinds per 100 hands
+}
+
+export interface SessionStats {
+  date: string;
+  hands: number;
+  winnings: number;
+  duration?: number;
+  bb100: number;
+}
+
+export interface PositionStats {
+  position: string;
+  hands: number;
+  winnings: number;
+  vpip: number;
+  pfr: number;
+  winRate: number;
+}
+
+export interface HandRange {
+  hand: string;
+  count: number;
+  winnings: number;
+  winRate: number;
+} 

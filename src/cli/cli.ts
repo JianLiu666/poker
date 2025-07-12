@@ -57,7 +57,10 @@ export class PokerCLI {
     console.log('  poker pot-odds 9 100 50           # 分析底池賠率 (9 outs, $100 pot, $50 bet)');
     console.log('  poker scenarios --min-outs 8      # 顯示 8+ outs 的場景');
     console.log('  poker simulate AKs QQ 1000000     # 模擬AK同花 vs QQ對子的勝率');
-    console.log('  poker reference                   # 顯示快速參考指南\n');
+    console.log('  poker reference                   # 顯示快速參考指南');
+    console.log('  poker import hands.txt            # 導入 PokerCraft 日誌文件');
+    console.log('  poker stats --report all          # 顯示所有統計報告');
+    console.log('  poker chart --type winnings       # 生成收益曲線圖\n');
   }
 }
 

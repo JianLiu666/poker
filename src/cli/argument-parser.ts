@@ -50,6 +50,17 @@ export class ArgumentParser {
         result.options = options;
         result.positionalArgs = positionalArgs;
         break;
+      case 'import':
+        const { options: importOptions, positionalArgs: importArgs } = this.parseImportArgs(remainingArgs);
+        result.options = importOptions;
+        result.positionalArgs = importArgs;
+        break;
+      case 'stats':
+        result.options = this.parseStatsArgs(remainingArgs);
+        break;
+      case 'chart':
+        result.options = this.parseChartArgs(remainingArgs);
+        break;
       default:
         result.options = {};
     }
@@ -135,5 +146,67 @@ export class ArgumentParser {
     }
     
     return { options, positionalArgs };
+  }
+
+  private static parseImportArgs(args: string[]): { options: CommandOptions; positionalArgs: string[] } {
+    const options: CommandOptions = {};
+    const positionalArgs: string[] = [];
+    
+    for (let i = 0; i < args.length; i++) {
+      const currentArg = args[i];
+      const nextArg = args[i + 1];
+      
+      if (currentArg === '--database' && nextArg) {
+        options.database = nextArg;
+        i++; // Skip next argument
+      } else if (currentArg === '--validate') {
+        options.validate = true;
+      } else if (currentArg && !currentArg.startsWith('--')) {
+        positionalArgs.push(currentArg);
+      }
+    }
+    
+    return { options, positionalArgs };
+  }
+
+  private static parseStatsArgs(args: string[]): CommandOptions {
+    const options: CommandOptions = {};
+    
+    for (let i = 0; i < args.length; i++) {
+      const currentArg = args[i];
+      const nextArg = args[i + 1];
+      
+      if (currentArg === '--database' && nextArg) {
+        options.database = nextArg;
+        i++; // Skip next argument
+      } else if (currentArg === '--report' && nextArg) {
+        options.report = nextArg;
+        i++; // Skip next argument
+      }
+    }
+    
+    return options;
+  }
+
+  private static parseChartArgs(args: string[]): CommandOptions {
+    const options: CommandOptions = {};
+    
+    for (let i = 0; i < args.length; i++) {
+      const currentArg = args[i];
+      const nextArg = args[i + 1];
+      
+      if (currentArg === '--database' && nextArg) {
+        options.database = nextArg;
+        i++; // Skip next argument
+      } else if (currentArg === '--type' && nextArg) {
+        options.type = nextArg;
+        i++; // Skip next argument
+      } else if (currentArg === '--output' && nextArg) {
+        options.output = nextArg;
+        i++; // Skip next argument
+      }
+    }
+    
+    return options;
   }
 } 
